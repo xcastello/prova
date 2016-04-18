@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Efectes | Inici</title>
+  <!-- Bootstrap -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/animate.css" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,500,700,200' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+
+</head>
+<body>
+<!-- menu -->
+  <div class="botomenu"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+  <div class="menu">
+    <ul>
+      <li><a href="#section1">section1</a></li>
+      <li><a href="#section2">section2</a></li>
+      <li><a href="#section3">section3</a></li>
+      <li><a href="#section3">section3</a></li>
+      <li><a href="#section4">section4</a></li>
+      <li><a href="#section2">section2</a></li>
+    </ul>
+  </div>
+<!-- End menu -->
+
+
+
+
+
+
+
+<!-- Scripts -->
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="assets/js/jquery-1.12.1.min.js"></script>
+  <script src="assets/js/jquery-2.2.1.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="assets/js/bootstrap.min.js"></script>
+
+  <script>
+
+//funció que altrena un efecte amb un altre al acabar l'efecte
+    $.fn.extend({
+      animateCss: function (animationName1, animationName2, elem) {
+        var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+        $(this).addClass(animationName1).one(animationEnd, function() {
+
+          if ($(this).attr('class')=='animated '+animationName1) {
+           $(this).removeClass(animationName1);
+           $(elem).animateCss(animationName2, animationName1, elem);
+         }else{
+           $(this).removeClass(animationName2);
+           $(elem).animateCss(animationName1, animationName2, elem);
+         }
+       });
+      }
+    });
+
+//element amb la funció aplicada
+    $('#nubol').animateCss('fadeIn','fadeOut' ,'#nubol');
+    $('#nubol1').animateCss('fadeIn','fadeOut' , '#nubol1');
+    $('#nubol2').animateCss('fadeIn','fadeOut' , '#nubol2');
+
+//funcinos carregades al entrar a la pàgina
+    $(window).on('load', function(){
+      peixR();
+      barcoR();
+      MarR();
+      Mar2R();
+      illa1R();
+      illa2R();
+    });
+
+// moviment peix
+    function peixR(){
+      $('#peix').animate({"right":"-200px"},30000, function() {
+       $('#peix').css("content","url(assets/img/peix2.png)");
+       peixL();
+     });  
+    }
+    function peixL(){
+      $('#peix').animate({"right":"120%"},35000, function() {
+        $('#peix').css("content","url(assets/img/peix.png)");
+        peixR();
+      });
+    }
+// END moviment peix
+
+// moviment barco
+    function barcoR(){
+      $('#barco').animate({"right":"-200px"},20000, function() {
+       barcoL();
+     });  
+    }
+    function barcoL(){
+      $('#barco').animate({"right":"120%"},20000, function() {
+        barcoR();
+      });
+    }
+// END moviment barco
+
+// moviment mar
+    function MarR(){
+      $('#section3').animate({"background-position":"100%"},10000, function() {
+       MarL();
+     });  
+    }
+    function MarL(){
+      $('#section3').animate({"background-position":"80%"},10000, function() {
+        MarR();
+      });
+    }
+    function Mar2R(){
+      $('#section4').animate({"background-position":"0"},10000, function() {
+       Mar2L();
+     });  
+    }
+    function Mar2L(){
+      $('#section4').animate({"background-position":"100%"},10000, function() {
+        Mar2R();
+      });
+    }
+// END moviment mar
+
+// Canvis imatges illa
+    function illa1R(){
+     $('#illa').animate({'font-size':'20px'},1000, function() {
+      $('#illa').css("content","url('assets/img/illa2.png')");
+      illa1L();
+    });  
+   }
+   function illa1L(){
+    $('#illa').animate({'font-size':'20px'},1000, function() {
+      $('#illa').css("content","url(assets/img/illa.png)");
+      illa1R();
+    });
+  }
+  function illa2R(){
+   $('#illa').animate({'font-size':'20px'},1000, function() {
+    $('#illa').css("content","url('assets/img/illa2.png')");
+    illa2L();
+  });  
+ }
+ function illa2L(){
+  $('#illa').animate({'font-size':'20px'},1000, function() {
+    $('#illa').css("content","url(assets/img/illa.png)");
+    illa2R();
+  });
+}
+// END Canvis imatges illa
+
+</script>
+
+<script>
+
+// Efecte fade in del submari al fer scroll
+ $( window ).scroll(function() {
+  if ($('#subm').attr("class")!="animated fadeIn") {
+    $('#subm').addClass('animated fadeIn');
+  }
+});
+
+// Canvi d'imatge del subamri al fer click
+ $('#subm').on('click', function(){
+  if ($('#subm').attr("class")=="animated fadeIn obert") {
+    $('#subm').removeClass('obert');
+    $('#subm').css("content","url(assets/img/subm.png)");
+  }else{
+    $('#subm').addClass('obert');
+    $('#subm').css("content","url(assets/img/subm2.png)");
+  }
+});
+
+</script>
+
+<script>
+//menu desplegable
+  $('.botomenu').on('click', function(){
+    if ($('.menu').css('display')=='block') {
+      $('.menu').css('display', 'none');
+    }else{
+     $('.menu').css('display', 'block');
+   }
+ });
+
+</script>
+
+</body>
+</html>
